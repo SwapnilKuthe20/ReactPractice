@@ -4,13 +4,21 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import PropsPractice from './Components/Props/PropsPractice'
 import ParentProps from './Components/ChilderProp/ParentProps'
+import DefaultProps from './Components/DefaultProps/DefaultProps'
+import ParentComp from './Components/PropsDrilling/ParentComp'
 
 function App() {
 
   return (
     <>
       {/* <PropsPractice /> */}
-      <ParentProps />
+      {/* <ParentProps /> */}
+      {/* <DefaultProps /> */}
+      <ParentComp />
+
+
+
+
 
     </>
   )
