@@ -6,6 +6,7 @@ import PropsPractice from './Components/Props/PropsPractice'
 import ParentProps from './Components/ChilderProp/ParentProps'
 import DefaultProps from './Components/DefaultProps/DefaultProps'
 import ParentComp from './Components/PropsDrilling/ParentComp'
+import ParentCompContext from './Components/ContextApi/ParentCompContext'
 
 function App() {
 
@@ -14,11 +15,8 @@ function App() {
       {/* <PropsPractice /> */}
       {/* <ParentProps /> */}
       {/* <DefaultProps /> */}
-      <ParentComp />
-
-
-
-
+      {/* <ParentComp /> */}
+      <ParentCompContext />
 
     </>
   )
