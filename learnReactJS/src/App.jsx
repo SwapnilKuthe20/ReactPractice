@@ -7,6 +7,7 @@ import ParentProps from './Components/ChilderProp/ParentProps'
 import DefaultProps from './Components/DefaultProps/DefaultProps'
 import ParentComp from './Components/PropsDrilling/ParentComp'
 import ParentCompContext from './Components/ContextApi/ParentCompContext'
+import LiftStateParent from './Components/LiftingStateUp/LiftStateParent'
 
 function App() {
 
@@ -16,7 +17,12 @@ function App() {
       {/* <ParentProps /> */}
       {/* <DefaultProps /> */}
       {/* <ParentComp /> */}
-      <ParentCompContext />
+      {/* <ParentCompContext /> */}
+      {/* <LiftStateParent /> */}
+
+
+
+
 
     </>
   )
