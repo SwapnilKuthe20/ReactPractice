@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import TaskItems from './TaskItems';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTask } from '../Features/TaskSlice';
 
 const TaskForm = () => {
 
     const [taskName, setTaskName] = useState("");
-    const [tasks, setTasks] = useState([]);
+    // const [tasks, setTasks] = useState([]);
+
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => (state.tasks))
+    // console.log(Array.isArray(tasks), "...full redux state");
 
     const handleChange = (e) => {
         setTaskName(e.target.value)
     }
 
     const handleAddTask = () => {
-        setTasks(prev => [...prev, taskName])
+        dispatch(addTask(taskName))
         setTaskName('')
     }
 
@@ -26,6 +32,7 @@ const TaskForm = () => {
                 <button onClick={handleAddTask} type='button'> Add Task </button>
 
                 <TaskItems tasks={tasks} />
+
             </div>
 
         </>

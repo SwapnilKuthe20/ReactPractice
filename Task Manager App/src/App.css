@@ -15,37 +15,46 @@
 .tittle {
   text-align: center;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .btn {
   width: 100%;
-  border: 1px solid red;
+  border: 2px solid red;
   padding: 10px;
 }
 
 .filter-bar {
-  width: full;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.filter-bar :active {
+  color: white;
+  background-color: brown;
 }
 
 .form {
   width: full;
 
-  label {
+  >label {
     display: block;
     margin-left: 20px;
   }
 
-  input {
+  >input {
     width: 30%;
     padding: 10px;
     border-radius: 6px;
     margin: 20px;
+    padding: 5px;
   }
 
-  button {
+  >button {
     padding: 10px;
     border-radius: 6px;
     background-color: blueviolet;
@@ -53,4 +62,39 @@
     display: block;
     margin-left: 20px;
   }
+}
+
+.checkboxStyle {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.InpCheckbox {
+  padding: 5px;
+  width: 18px;
+}
+
+.task-list {
+  text-align: center;
+  margin: 0;
+}
+
+.completed {
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.dlt-button {
+  padding: 4px;
+  color: white;
+  background: red;
+  border: none;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+.label {
+  margin-left: 10px;
+
 }

@@ -11,8 +11,8 @@ function App() {
 
         <h3 className='tittle'> Task Manager App </h3>
 
-        <TaskFilterBar />
         <TaskForm />
+        <TaskFilterBar />
       </div>
 
     </>
