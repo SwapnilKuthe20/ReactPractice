@@ -1,10 +1,20 @@
 import React from 'react'
 import './App.css'
+import TaskFilterBar from './Components/TaskFilterBar'
+import TaskForm from './Components/TaskForm'
+import TaskItems from './Components/TaskItems'
 function App() {
 
   return (
     <>
-      <h3> Task Manager App </h3>
+      <div className='container'>
+
+        <h3 className='tittle'> Task Manager App </h3>
+
+        <TaskFilterBar />
+        <TaskForm />
+      </div>
+
     </>
   )
 }
