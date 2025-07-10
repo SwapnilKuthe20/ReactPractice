@@ -26,16 +26,19 @@
 
 .filter-bar {
   border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   cursor: pointer;
+  padding: 20px;
 }
 
 .filter-bar :active {
   color: white;
   background-color: brown;
+}
+
+.filetr-btn {
+  background-color: blueviolet;
+  color: aliceblue;
 }
 
 .form {

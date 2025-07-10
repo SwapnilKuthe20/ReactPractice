@@ -1,28 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const savedLocalStorage = localStorage.getItem("tasks")
+
+const initialState = savedLocalStorage ? JSON.parse(savedLocalStorage) : { tasks: [], filter: "ALL" }
+
 const taskSlice = createSlice({
     name: "tasks",
-    initialState: [],
+    initialState,
     reducers: {
         addTask: (state, action) => {
-            console.log(state, ',,,state');
-            console.log(action, ',,,action');
+            // console.log(state, ',,,state');
+            // console.log(action, ',,,action');
 
-            state.push({ id: Date.now(), name: action.payload, completed: false })
+            state.tasks.push({ id: Date.now(), name: action.payload, completed: false })
         },
 
         deleteTask: (state, action) => {
 
-            return state.filter((task) => {
+            return state.tasks.filter((task) => {
                 // console.log(state, "fileter");
                 return task.id !== action.payload;
             })
         },
 
         completeTask: (state, action) => {
-            const completedTask = state.find(task => task.id === action.payload)
+            const completedTask = state.tasks.find(task => task.id === action.payload)
 
             completedTask && (completedTask.completed = !completedTask.completed)
+        },
+
+        setFilter: (state, action) => {
+            state.filter = action.payload;
         }
     }
 })
@@ -31,5 +39,5 @@ const taskSlice = createSlice({
 // console.log(taskSlice.reducer, "...taskSlice.reducer");
 // console.log(taskSlice.actions, "...taskSlice.actions");
 
-export const { addTask, deleteTask, completeTask } = taskSlice.actions;
+export const { addTask, deleteTask, completeTask, setFilter } = taskSlice.actions;
 export default taskSlice.reducer;

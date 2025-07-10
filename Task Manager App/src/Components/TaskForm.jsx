@@ -9,7 +9,7 @@ const TaskForm = () => {
     // const [tasks, setTasks] = useState([]);
 
     const dispatch = useDispatch();
-    const tasks = useSelector((state) => (state.tasks))
+    // const tasks = useSelector((state) => (state.tasks))
     // console.log(Array.isArray(tasks), "...full redux state");
 
     const handleChange = (e) => {
@@ -31,7 +31,7 @@ const TaskForm = () => {
 
                 <button onClick={handleAddTask} type='button'> Add Task </button>
 
-                <TaskItems tasks={tasks} />
+                <TaskItems />
 
             </div>
 
