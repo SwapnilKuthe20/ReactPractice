@@ -1,0 +1,302 @@
+:: State ::
+
+1. Redux me state ka use kya hai?
+
+Redux me state basically ek central data store hota hai.
+
+Isme hum apne app ka current data rakhte hain.
+
+Ye ek single source of truth hota hai — matlab poore app me data yahi se milega.
+//--------------------------------
+
+:: Action ::
+
+2. Action kya hota hai?
+
+Ek plain JavaScript object hota hai.
+
+Isme type (mandatory) hota hai — ye batata hai ki kis type ka kaam ho raha hai.
+
+Isme payload (optional) ho sakta hai — ye wo data hota hai jo kaam ke liye chahiye.
+
+Example:
+{
+  type: 'ADD_TO_CART',
+  payload: { id: 1, name: 'Shoes' }
+}
+
+Action ka kaam Redux me: Flow ::
+
+UI Event → Dispatch(Action) → Reducer → State Update → UI Re-render
+
+//---------------------------------------------
+
+3. Action creator
+
+Har baar manually object banana boring hota hai, isliye hum action creators banate hain —
+ye sirf ek function hota hai jo action object return karta hai.
+
+Example: 
+
+function addToCart(item) {
+  return {
+    type: 'ADD_TO_CART',
+    payload: item
+  }
+}
+
+// Usage
+dispatch(addToCart({ id: 1, name: 'Shoes' }));
+// ---------------------------------------------
+
+4. Agar action na ho to?
+
+Tu directly reducer ko data bhej nahi sakta, kyunki Redux ka flow toot jayega.
+Action ek standard tariqa hai batane ka: “bhai ye kaam kar aur ye data le.”
+Action ke bina debugging, logging, aur Redux DevTools ka fayda nahi milega.
+
+Bhai short me:
+
+Action = "Order slip" jo store ko batata hai ki kaunsa kaam karna hai aur kis data ke saath.
+
+//--------------------------
+
+:: Reduces ::
+Bhai, Redux ka reducer samajh le — ye Redux ka “data chef” hai.
+Action se recipe (instruction) milti hai, reducer us recipe ke hisaab se naya state banata hai.
+
+Reducer kya hota hai?
+
+Pure function hota hai (matlab: same input → same output, bina side effects).
+Ye current state aur action leta hai, aur naya state return karta hai.
+Redux ka rule: state ko directly modify nahi karna, hamesha copy bana ke update karna.
+
+Example:
+
+const cartReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TO_CART':
+      return [...state, action.payload]; // naya item add karke naya array
+    case 'REMOVE_FROM_CART':
+      return state.filter(item => item.id !== action.payload.id);
+    default:
+      return state; // agar koi match na ho to purana state wapas
+  }
+};
+
+--------------
+2. Reducer ka kaam Redux flow me
+
+Flow:
+
+UI Event → Dispatch(Action) → Reducer(state + action) → Naya State → Store → UI Re-render
+
+
+UI Event: User ne button dabaya.
+
+Action: { type: 'ADD_TO_CART', payload: {...} }
+
+Reducer: Action dekhega, state copy karega, update karega, return karega.
+
+Store: Naya state rakhega.
+
+UI: Automatically update hoga.
+
+-------
+3. Reducer ke rules
+
+Pure function hona chahiye:
+
+Same input → same output.
+
+Koi random value, API call, ya side effect nahi.
+
+State mutate nahi karni — immutable update karna:
+
+❌ state.push(item)
+
+✅ [...state, item]
+
+Hamesha naya object/array return karna.
+
+Bhai short me:
+Reducer wo banda hai jo action padh ke, purane state ki copy banata hai, usme changes karta hai, aur naya state store ko de deta hai.
+----------------------------------------------
+
+:: Store ::
+
+1. Store kya hai?
+
+Redux ka store ek JavaScript object hai jo:
+
+State hold karta hai (pure app ka ek hi global state yaha hota hai).
+
+State ko read karne ka method deta hai (getState()).
+
+State ko update karne ka method deta hai (dispatch(action)).
+
+State change hone pe sunne ka method deta hai (subscribe(listener)).
+----------
+
+Step-by-step:
+
+Store initially ek default state rakhta hai (reducers se).
+
+Jab dispatch(action) hota hai:
+
+Store us action ko reducer ko bhejta hai.
+
+Reducer se naya state aata hai.
+
+Store apna state update karta hai.
+
+Store apne subscribers ko bolta hai “bhai state badal gaya, update ho jao.”
+
+Jaha-jaha state use ho raha tha, UI re-render ho jata hai.
+
+--------
+store.getState()     // current state dekhne ke liye
+store.dispatch({ type: 'ADD_TO_CART', payload: {...} }) // action bhejne ke liye
+store.subscribe(() => { console.log('State changed:', store.getState()) }) // changes sunne ke liye
+------------------------------------------------
+
+:: Dispatch ::
+
+Bhai, Redux ka dispatch basically “doodh ka doodh, pani ka pani” karne wala kaam karta hai —
+Matlab ye ek trigger button hai jo action ko store tak pahunchata hai.
+
+1. Dispatch kya hai?
+
+Ek method hota hai jo Redux store deta hai.
+Iska kaam: Action ko store me bhejna.
+Jab tu store.dispatch(action) call karta hai, 
+Redux wo action reducer ko forward karta hai,
+reducer se naya state banata hai, aur store me save karta hai.
+----------
+
+3. Dispatch kahan use hota hai?
+
+React me mostly useDispatch() hook ke saath:
+
+  const dispatch = useDispatch();
+
+Example ::
+
+  import { useDispatch } from 'react-redux';
+
+const MyComponent = () => {
+  const dispatch = useDispatch();
+
+  const addItem = () => {
+    dispatch({ type: 'ADD_TO_CART', payload: { id: 1, name: 'Shoes' } });
+  };
+
+  return <button onClick={addItem}>Add to Cart</button>;
+};
+
+--------
+4. Agar dispatch na ho to?
+
+Tu action ko manually reducer me bhejna padega (jo Redux ke rules ke against hai).
+
+Store ko pata hi nahi chalega ki state kab update karni hai.
+
+Redux ka predictable flow toot jayega.
+--------
+
+Bhai short me:
+
+Dispatch = “Postman” jo tera action (chitthi) store ke reducer tak pahunchaata hai, taaki state update ho.
+-----------------------------------------------------------
+
+:: Selectors ::
+
+1. Selector kya hai?
+
+Ek function jo Redux store ka state leta hai aur usme se specific data return karta hai.
+
+Selector ka kaam sirf read karna hota hai, state ko modify nahi karte.
+
+Isse code clean, reusable aur easy to maintain hota hai.
+------------------------------------------------------------------
+
+:::: Har part ka role ::::
+
+:: State ::
+
+Kya: App ka current data (single source of truth).
+
+Kahan: Store ke andar.
+
+Kaam: UI ko data dena aur update hone par UI ko re-render karwana.
+
+
+:: Action ::
+
+Kya: Plain JS object jo batata hai “kya kaam karna hai” + optional data.
+
+Kaam: Reducer ko instruction dena.
+
+
+:: Reducer ::
+
+Kya: Pure function jo state + action leke naya state return karta hai.
+
+Kaam: Action ke hisaab se state update karna.
+
+
+:: Store ::
+
+Kya: Redux ka central object jo:
+
+State rakhta hai.
+
+Dispatch handle karta hai.
+
+Subscribers ko notify karta hai.
+
+Kaam: State ka management + reducers ke saath coordination.
+
+
+:: Dispatch ::
+
+Kya: Store ka method jo action ko reducer tak pahunchata hai.
+
+Kaam: State change ka process start karna.
+
+
+::: Selectors :::
+
+Kya: Functions jo store ke state me se specific data nikalte hain.
+
+Kaam: Components ko sirf required data dena, performance improve karna.
+
+----------------------------------------
+Ek Real Example Flow
+
+UI Event: User “Add to Cart” button click karta hai.
+
+Dispatch: dispatch(addToCart({ id: 1, name: 'Shoes' })) call hota hai.
+
+Action: { type: 'ADD_TO_CART', payload: {...} } store me jata hai.
+
+Reducer: cartReducer purane state me item add karke naya state return karta hai.
+
+Store: Naya state save karta hai aur subscribers ko batata hai.
+
+Selector: selectCartItems naya cart data UI ko deta hai.
+
+UI Update: React component re-render hota hai aur updated cart dikhta hai.
+---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
