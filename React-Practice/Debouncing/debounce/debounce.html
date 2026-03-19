@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <label for="search"> Search </label>
+    <input type="text" id="search">
+
+    <script>
+
+        const input = document.getElementById("search")
+        // console.log(input, "..input");
+        let timer;
+
+        input.addEventListener("input", (e) => {
+            // console.log("...e call");
+            console.log(timer, "...timer");
+
+            clearTimeout(timer)
+
+            timer = setTimeout(() => {
+                console.log(e.target.value, "....Api call");
+
+            }, 1000)
+
+        })
+
+    </script>
+
+</body>
+
+</html>
