@@ -15,8 +15,13 @@ const Sidebar = () => {
                 {
                     NavlinkItems.map(({ id, to, label }) => (
                         <li key={id} className='py-3 '>
-                            <NavLink to={to} end={to === '/'}
-                                className={({ isActive }) => `block px-3 py-2 rounded-md transition-colors duration-200  ${isActive ? 'text-lime-300' : 'text-white hover:text-amber-300}'}`} >
+                            <NavLink
+                                to={to}
+                                end={to === '/'}
+                                className={({ isActive }) =>
+                                    `block px-3 py-2 rounded-md transition-colors duration-200 
+                                 ${isActive ? 'text-lime-300' : 'text-white hover:text-amber-300}'}`}
+                            >
                                 {label}
                             </NavLink>
                         </li>

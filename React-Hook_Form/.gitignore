@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+AsyncThunk_Scenarios/
+Redux/
+Redux_Aug2025/
+ReduxToolKitPractice/
+react-demo/
+reactBasic/
+redux_practice/
+redux_rivision/
+rtk_query_pokemon/
+counter_redux/
+debounce/
+Debounce-Practice/
