@@ -5,6 +5,8 @@ import InfinteScrolling from './Components/InfinteScrolling'
 import Dashboard from './Layout/Dashboard'
 import Home from './Components/Home'
 import InstaFeed from './Components/InstaFeed'
+import ControlledFrom from './Components/ControlledFrom'
+import ReactHookForm from './Components/ReactHookForm'
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
           <Route path='debouncing' element={<Debouncing />} />
           <Route path='infinteSrcolling' element={<InfinteScrolling />} />
           <Route path='instafeed' element={<InstaFeed />} />
+          <Route path='controlForm' element={<ControlledFrom />} />
+          <Route path='hookForm' element={<ReactHookForm />} />
         </Route>
       </Routes>
 

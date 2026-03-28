@@ -8,6 +8,8 @@ const Sidebar = () => {
         { id: 2, to: '/debouncing', navlink: "Debouncing" },
         { id: 3, to: '/infinteSrcolling', navlink: "Infinite-Scrolling" },
         { id: 4, to: '/instafeed', navlink: "InstaFeed" },
+        { id: 5, to: '/controlForm', navlink: "Control-Form" },
+        { id: 6, to: '/hookForm', navlink: "React-Hook-Form" },
     ]
 
     return (
@@ -24,7 +26,7 @@ const Sidebar = () => {
                             key={id}
                             to={to}
                             className={({ isActive }) => isActive ? 'text-amber-300 font-bold ' : 'text-white '}>
-                            <h1 className=' '> {navlink} </h1>
+                            <h1 > {navlink} </h1>
                         </NavLink >
                     ))
                 }
