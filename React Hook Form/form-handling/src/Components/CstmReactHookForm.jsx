@@ -24,7 +24,7 @@ const CstmReactHookForm = () => {
     }
 
     return (
-        <div className='w-full bg-cyan-900 py-8'>
+        <div className=' bg-cyan-900 py-8'>
             <h1 className='text-2xl font-bold my-1 text-center'> Custom React Hook Form </h1>
 
             <form

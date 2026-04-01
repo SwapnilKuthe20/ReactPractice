@@ -6,8 +6,12 @@ const Dashboard = () => {
     return (
         <div className=''>
             <div className='flex '>
-                <Sidebar />
-                <Outlet />
+                <div className='w-3xs'>
+                    <Sidebar />
+                </div>
+                <div className='w-full'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )
