@@ -8,6 +8,8 @@ const Sidebar = () => {
         { id: 2, to: "/reacthook", navlink: "React-Hook-Form" },
         { id: 3, to: "/custom", navlink: "Custom-React-Hook" },
         { id: 4, to: "/zod", navlink: "Zod Validations" },
+        { id: 5, to: "/signup", navlink: "Sign-Up Form" },
+        { id: 6, to: "/login", navlink: "Login Form" },
     ]
 
     return (

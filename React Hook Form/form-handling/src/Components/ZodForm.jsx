@@ -2,58 +2,78 @@ import MyInput from './MyInput'
 import { Controller, useForm, useFormState, useWatch } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { da } from 'zod/locales'
 
 const ZodForm = () => {
 
-    const data = {
-        Name: "Swapnil",
-        Email: "swapnilkuthe20@gmail.com",
-        Phone: 797202196,
-        Password: "swapkuthe20"
-    }
+    // const data = {
+    //     Name: "Swapnil",
+    //     Email: "swapnilkuthe20@gmail.com",
+    //     Phone: 797202196,
+    //     Password: "swapkuthe20",
+    //     confPassword: "swapkuthe202",
+    // }
 
-    const schema = z.object({
-        Name: z.string().min(1, "Required Name"),
-        Email: z.string().min(1, "Required Email").email("Invalid Email"),
-        Phone: z.number("Number type required").min(1, "Required Phone").length(10, "Mobile number must be 10 digits "),
-        Password: z.string().min(1, "Required Password"),
-    })
+    // const schema = z.object({
+    //     Name: z.string().min(1, "Required Name"),
+    //     Email: z.string().min(1, "Required Email").email("Invalid Email"),
+    //     Phone: z.number("Number type required").min(1, "Required Phone"),
+    //     Password: z.string().min(1, "Required Password"),
+    //     confPassword: z.string().min(1, "Required Password"),
+    // }).superRefine((data, ctx) => {
+    //     // console.log(data, "...data... superRefine");
+    //     console.log(ctx, "...ctx");
+    //     if (data.Password !== data.confPassword) {
+    //         ctx.addIssue({
+    //             path: ["confPassword"],
+    //             message: "Password does not match"
+    //         })
+    //     }
+    // })
 
-    const result = schema.safeParse(data)
-    const zodErrors = result.error.flatten().fieldErrors
-    console.log(zodErrors.Phone[0], "...zodErrors");
+    // const result = schema.safeParse(data)
+    // console.log(result, "...result");
+
+    // const zodErrors = result.error.flatten().fieldErrors;
+    // console.log(zodErrors.Phone[0], "...zodErrors");
 
 
     // result.success ? console.log(result, "...data") : console.log(result.error.issues[0].message, "....Error")
-
+    // -------------------------------------------------------------------------------------------------
     // console.log("Render.....");
 
-    // const schema = z.object({
-    //     Name: z.string().min(1, "..Name is required"),
-    //     Email: z.string().min(1, "...Email is required").email("...Invalid Email"),
-    //     Password: z.string().min(1, "Password is required"),
-    //     ConfirmPassword: z.string().min(1, "Confirm Password is required")
-    // })
-    // console.log(schema, "...schema");
+    const schema = z.object({
+        Name: z.string().min(1, "..Name is required"),
+        Email: z.string().min(1, "...Email is required").email("...Invalid Email"),
+        Password: z.string().min(1, "Password is required"),
+        ConfirmPassword: z.string().min(1, "Confirm Password is required")
+    }).superRefine((data, ctx) => {
+        if (data.Password !== data.ConfirmPassword) {
+            ctx.addIssue({
+                path: ['ConfirmPassword'],
+                message: "Password does not match"
+            })
+        }
+    })
 
     const { control, handleSubmit, reset } = useForm({
         mode: "onBlur",
         reValidateMode: "onChange",
         shouldFocusError: true,
-        // resolver: zodResolver(schema)
+        resolver: zodResolver(schema)
     })
 
     const { errors } = useFormState({ control })
+    // console.log(errors, "...errors useForm");
+
     const passwordWatch = useWatch({
         control,
         name: "Password",
         defaultValue: ""
     })
-    // console.log(passwordWatch, "..passWatch");
+    console.log(passwordWatch, "..passWatch");
 
     const onValid = (data) => {
-        // console.log(data, "...data");
+        console.log(data, "...data");
 
         reset()
     }

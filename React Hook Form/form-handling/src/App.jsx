@@ -5,6 +5,8 @@ import ReactHookForm from './Components/ReactHookForm'
 import CstmReactHookForm from './Components/CstmReactHookForm'
 import Dashboard from './Routing/Dashboard'
 import ZodForm from './Components/ZodForm'
+import SignUpZod from './Components/SignUpZod'
+import LoginZod from './Components/LoginZod'
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
     { id: 2, path: "/custom", component: <CstmReactHookForm /> },
     { id: 3, path: "/reacthook", component: <ReactHookForm /> },
     { id: 4, path: "/zod", component: <ZodForm /> },
+    { id: 5, path: "/signup", component: <SignUpZod /> },
+    { id: 6, path: "/login", component: <LoginZod /> },
   ]
 
   return (
