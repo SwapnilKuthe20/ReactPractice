@@ -10,6 +10,7 @@ const Sidebar = () => {
         { id: 4, to: "/zod", navlink: "Zod Validations" },
         { id: 5, to: "/signup", navlink: "Sign-Up Form" },
         { id: 6, to: "/login", navlink: "Login Form" },
+        { id: 7, to: "/profile", navlink: "ZOD Projects" },
     ]
 
     return (
